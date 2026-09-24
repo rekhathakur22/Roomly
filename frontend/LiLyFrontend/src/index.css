@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@import url('https://googleapis.com');
+
+@theme {
+
+     /* Main brand color for headers, main buttons, and primary branding */
+  --color-brand-primary: #3368A0;
+  /* Lighter blue accent for links, highlights, or secondary buttons */
+  --color-brand-secondary: #66A3BF;
+  
+  --color-brand-tranparent-box:#F2F2F2;
+ /* Soft sage/mint color perfect for cards, borders, badges, or success states */
+  --color-brand-mint: #C8DFDB;
+  /* Warm off-white ideal for your website's main background */
+  --color-brand-bg: #F2EFE7;
+    /* --- Supporting Text Colors --- */
+  /* Deep slate-blue for highly readable main body text (never use pure black) */
+  --color-ui-text-dark: #1E2D3D;
+  /* Muted tone for secondary text, captions, and placeholders */
+  --color-ui-text-muted: #52667A;
+
+  /* --- Border & Card Colors --- */
+  /* Perfect for cards or content blocks sitting on top of your warm brand-bg */
+  --color-ui-card: #FFFFFF;
+  /* A soft, subtle border color that matches the cool blue/mint undertones */
+  --color-ui-border: #D3E1E0;
+
+  /* --- Interactive Hover States --- */
+  /* Darker shade of primary for hover states (e.g., hover:bg-brand-primary-hover) */
+  --color-brand-primary-hover: #275282;
+  /* Darker shade of secondary for hover states */
+  --color-brand-secondary-hover: #4D8AA7;
+
+  /* --- Custom Brand Shadow --- */
+  /* A soft, colored shadow that looks natural with your cream background */
+  --shadow-brand-sm: 0 2px 4px 0 rgba(30, 45, 61, 0.04);
+  --shadow-brand-md: 0 4px 12px -2px rgba(30, 45, 61, 0.08), 0 2px 6px -1px rgba(30, 45, 61, 0.04);
+
+  --font-heading: 'Poppins', sans-serif;
+}
+
