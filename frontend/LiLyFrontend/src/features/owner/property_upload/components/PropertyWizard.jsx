@@ -1,25 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { PropertyFormContext } from "../context/PropertyUploadContext";
 import StepIndicator  from "./StepIndicator";
 import BasicDetails from "./steps/BasicDetails";
 import Varification from "./steps/Varification";
 import LocationDetails from "./steps/LocationDetails";
 import NavigationButtons from "./NavigationButtons";
+import PhotosVideos from "./steps/PhotosVideos";
 const PropertyWizard = ()=>{
-   const [currentStep,setCurrentStep] = useState(1);
+   const {currentStep} = useContext(PropertyFormContext);
 
-   const handleNext = ()=>{
-    setCurrentStep((prev)=> prev+1);
-   }
-
-   const handleBack = () =>{
-    setCurrentStep((prev)=>prev-1);
-   }
 
     return (
-        <div className="p-10" >
-            <h1 className="text-2xl text-gray-800 font-serif antialiased font-semibold mb-5">List Your Property</h1>
+        <div className="w-full max-w-5xl mx-auto p-4 sm:p-6 md:p-10 font-roboto" >
+            <h1 className=" text-2xl sm:text-3xl font-extrabold text-brand-primary mb-5">List Your Property</h1>
 
-            <StepIndicator currentStep={currentStep}/>
+            <StepIndicator/>
 
             {currentStep === 1 && <BasicDetails />}
 
@@ -27,11 +22,10 @@ const PropertyWizard = ()=>{
 
             {currentStep === 3 && <Varification />}
 
-        <NavigationButtons
-        currentStep={currentStep}
-        onNext={handleNext}
-        onBack={handleBack}
-      />
+            {currentStep === 4 && <PhotosVideos />}
+
+
+        <NavigationButtons/>
 
         </div>
     )

@@ -1,12 +1,31 @@
+import { useContext } from "react";
+import { PropertyFormContext } from "../../context/PropertyUploadContext";
 const BasicDetails = ()=>{
+    const {formData,setFormData} = useContext(PropertyFormContext);
+
+    // title handler
+    const handleChange = (e)=>{
+        console.log(e.target);
+        const {name,value}=e.target;
+        setFormData((prev)=>(
+            {
+                ...prev,
+                [name]:value
+            }
+        ))
+    }
     return (
-        <div className="">
+        <div className="text-sm">
+            {/* basic details */}
             <section className="mb-5">
                 <h2 className="mb-2">1. Step1: Basic Details</h2>
-                <div className="flex gap-5">
+                <div className="flex flex-col gap-4 md:flex md:gap-5">
                     <div className="flex flex-1 flex-col">
-                        <label htmlFor="" className="mb-2">Property Title</label>
+                        <label className="mb-2">Property Title</label>
                         <textarea
+                         name="title"
+                         value={formData.title}
+                         onChange={handleChange}
                          placeholder="eg. Gurukul Hostel For Girls"
                          className="
                             border
@@ -23,6 +42,9 @@ const BasicDetails = ()=>{
                     <div className="flex flex-1 flex-col">
                          <label htmlFor="" className="mb-2">Property Type</label>
                         <select 
+                         name="propertyType"
+                         value={FormDataEvent.propertyType}
+                         onChange={handleChange}
                          className="
                             border
                            border-gray-500 
@@ -72,10 +94,10 @@ const BasicDetails = ()=>{
                 </div>
             </section>
 
-            <div className="flex mb-2">
+       {/* pricing and availability */}
             <section className="flex-1">
                 <h2 className="mb-2" >2. Pricing & Availability</h2>
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-4 md:flex-row md:gap-3">
                     <div className="flex flex-col flex-1">
                         <label htmlFor="" className="mb-2">Monthly Rent ($)</label>
                         <input 
@@ -123,23 +145,18 @@ const BasicDetails = ()=>{
                 </div>
                 
             </section>
-            <section className="flex-1">
-                <h2>3. Photos & Media</h2>
-                <div>
+           
+            {/* Amenities & Rules */}
 
-                </div>
-            </section>
-            </div>
-
-            <section>
+            <section className="mt-5">
                 <h2 className="mb-2">4. Amenities & Rules</h2>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                     <button
                      className="
                             bg-gray-300
                             border
                            border-gray-500 
-                            px-2
+                            px-3 py-1.5
                             rounded-sm
                             "
                     >
@@ -169,6 +186,7 @@ const BasicDetails = ()=>{
                     </button>
                 </div>
             </section>
+
         </div>
     )
 }
