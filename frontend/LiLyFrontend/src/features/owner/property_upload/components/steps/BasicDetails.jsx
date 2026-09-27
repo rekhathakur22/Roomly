@@ -5,7 +5,6 @@ const BasicDetails = ()=>{
 
     // title handler
     const handleChange = (e)=>{
-        console.log(e.target);
         const {name,value}=e.target;
         setFormData((prev)=>(
             {
@@ -13,6 +12,24 @@ const BasicDetails = ()=>{
                 [name]:value
             }
         ))
+    }
+
+    const handleGuestIncrease = (e)=>{
+       setFormData((prev)=>(
+        {
+            ...prev,
+            guests:prev.guests + 1
+        }
+       ))
+    }
+
+    const handleGuestDecrease = (e)=>{
+       setFormData((prev)=>(
+        {
+            ...prev,
+            guests:prev.guests - 1
+        }
+       ))
     }
     return (
         <div className="text-sm">
@@ -60,11 +77,13 @@ const BasicDetails = ()=>{
                             <option value="Apartment" >Apartment</option>
                         </select>
                     </div>
+                    
                     <div className="flex  flex-1 flex-col"> 
                         <label htmlFor="" className="mb-2">Number of Guests</label>
                         <div>
                             <button 
                             type="button"
+                            onClick={handleGuestDecrease}
                              className="
                             border
                             border-r-none
@@ -78,7 +97,8 @@ const BasicDetails = ()=>{
                             >-</button>
                             <button
                              type="button" 
-                              className="
+                             onClick={handleGuestIncrease}
+                            className="
                             border
                            border-gray-500 
                             rounded-sm
@@ -88,7 +108,7 @@ const BasicDetails = ()=>{
                             focus:outline-brand-primary 
                             "
                             >+</button>
-                            <span className="ml-2">2 Guests</span>
+                            <span className="ml-2">{formData.guests} Guests</span>
                         </div>
                     </div>
                 </div>
@@ -101,8 +121,11 @@ const BasicDetails = ()=>{
                     <div className="flex flex-col flex-1">
                         <label htmlFor="" className="mb-2">Monthly Rent ($)</label>
                         <input 
-                        type="number"
-                        placeholder="eg. 5000" 
+                         type="number"
+                         placeholder="eg. 5000" 
+                         name="monthlyRent"
+                         value={formData.monthlyRent}
+                         onChange={handleChange}
                          className="
                              border
                            border-gray-500 
@@ -116,8 +139,11 @@ const BasicDetails = ()=>{
                     <div className="flex flex-col flex-1">
                         <label htmlFor="" className="mb-2">Security Deposite ($)</label>
                         <input 
-                        type="number" 
-                        placeholder="eg. 5000"
+                         type="number" 
+                         name="securityDeposit"
+                         value={formData.securityDeposit}
+                         onChange={handleChange}
+                         placeholder="eg. 5000"
                          className="
                             border
                            border-gray-500 
@@ -132,7 +158,10 @@ const BasicDetails = ()=>{
                         <label htmlFor="" className="mb-2">Available From</label>
                         <input
                          type="date" 
-                          className="
+                         name="availableFrom"
+                         value={formData.availableFrom}
+                         onChange={handleChange}
+                         className="
                             border
                            border-gray-500 
                             p-1
