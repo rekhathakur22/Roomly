@@ -1,6 +1,14 @@
 import { useContext } from "react";
 import { PropertyFormContext } from "../../context/PropertyUploadContext";
 const BasicDetails = ()=>{
+    const amenities = [
+     "WiFi",
+     "Parking",
+     "AC",
+     "Washing Machine",
+     "Geyser",
+    ];
+
     const {formData,setFormData} = useContext(PropertyFormContext);
 
     // title handler
@@ -31,11 +39,21 @@ const BasicDetails = ()=>{
         }
        ))
     }
+
+    const handleChecked = (e)=>{
+       const {value,checked} = e.target;
+       setFormData((prev)=>({
+        ...prev,
+        amenities:checked
+        ? [...prev.amenities,value]
+        : [prev.amenities.filter(amenity => amenity !== value)]
+       }))
+    }
     return (
         <div className="text-sm">
             {/* basic details */}
             <section className="mb-5">
-                <h2 className="mb-2">1. Step1: Basic Details</h2>
+                <h2 className="mb-2 font-bold text-lg" >1. Step1: Basic Details</h2>
                 <div className="flex flex-col gap-4 md:flex md:gap-5">
                     <div className="flex flex-1 flex-col">
                         <label className="mb-2">Property Title</label>
@@ -116,7 +134,7 @@ const BasicDetails = ()=>{
 
        {/* pricing and availability */}
             <section className="flex-1">
-                <h2 className="mb-2" >2. Pricing & Availability</h2>
+                <h2 className="mb-2 font-bold text-lg" >2. Pricing & Availability</h2>
                 <div className="flex flex-col gap-4 md:flex-row md:gap-3">
                     <div className="flex flex-col flex-1">
                         <label htmlFor="" className="mb-2">Monthly Rent ($)</label>
@@ -178,41 +196,16 @@ const BasicDetails = ()=>{
             {/* Amenities & Rules */}
 
             <section className="mt-5">
-                <h2 className="mb-2">4. Amenities & Rules</h2>
-                <div className="flex flex-wrap gap-3">
-                    <button
-                     className="
-                            bg-gray-300
-                            border
-                           border-gray-500 
-                            px-3 py-1.5
-                            rounded-sm
-                            "
-                    >
-                     WiFi
-                    </button>
-                    <button
-                     className="
-                            bg-gray-300
-                            border
-                           border-gray-500 
-                            px-2
-                            rounded-sm
-                            "
-                    >
-                        24Hr Electricity
-                    </button>
-                    <button
-                    className="
-                            bg-gray-300
-                            border
-                           border-gray-500 
-                            px-2
-                            rounded-sm
-                            "
-                    >
-                        Parking
-                    </button>
+                <h2 className="mb-2 font-bold text-lg">3. Amenities & Rules</h2>
+                <div className="flex flex-wrap gap-3 text-sm">
+                   {
+                    amenities.map((value)=>(
+                       <label key={value}>
+                        <input type="checkbox" value={value} onChange={handleChecked} checked={formData.amenities.includes(value)} className="mr-2"/>
+                        {value}
+                       </label>
+                    ))
+                   }
                 </div>
             </section>
 

@@ -21,6 +21,8 @@ const PropertyFormProvider = ({children})=>{
      securityDeposit: "",
      availableFrom: "",
 
+     amenities:[],
+
      streetAddress:"",
      Apartment:"",
      state:"",

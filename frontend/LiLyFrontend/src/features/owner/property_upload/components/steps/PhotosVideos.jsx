@@ -1,5 +1,13 @@
 import { Camera } from "lucide-react";
 const PhotosVideos = ()=> {
+   const cloudName="q3n5przz";
+   const presetName = "roomly_property_image";
+   const handleChange = (e)=>{
+
+    const files = Array.from(e.target.files)
+    console.log(files);
+   }
+   
 
     return (
     <div className="w-full md:w-2xl h-70">
@@ -47,6 +55,7 @@ const PhotosVideos = ()=> {
       id="propertyPhotos"
       type="file"
       accept="image/png,image/jpeg"
+      onChange={handleChange}
       multiple
       className="hidden"
     />
