@@ -23,7 +23,7 @@ const  Varification = ()=>{
                          name='fullName'
                          value={formData.fullName}
                          onChange={handleChange}
-                         placeholder="eg. Gurukul Hostel For Girls"
+                         placeholder="eg. VishnuNath Chouhan"
                          className="
                             border
                            border-gray-500
@@ -43,7 +43,7 @@ const  Varification = ()=>{
                          name='email'
                          value={formData.email}
                          onChange={handleChange}
-                         placeholder="eg. Gurukul Hostel For Girls"
+                         placeholder="eg. shivagi22@gmail.com"
                          className="
                             border
                            border-gray-500
@@ -65,7 +65,7 @@ const  Varification = ()=>{
                             name='contactNumber'
                             value={formData.contactNumber}
                             onChange={handleChange}
-                            placeholder="eg. Gurukul Hostel For Girls"
+                            placeholder="eg. 8787878787"
                             className="
                             border
                            border-gray-500
