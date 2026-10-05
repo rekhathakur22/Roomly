@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { PropertyFormContext } from "../context/PropertyUploadContext";
-const NavigationButtons = () => {
+const NavigationButtons = ({handleSubmit}) => {
     const {currentStep,handleNext,handleBack} = useContext(PropertyFormContext);
   return (
     <div className="flex flex-wrap gap-3 mt-5 justify-end text-sm">
@@ -20,7 +20,7 @@ const NavigationButtons = () => {
 
         {currentStep == 4 && 
         <div  className="bg-brand-primary text-white px-6 py-2 sm:px-10 sm:py-1.5">
-            <button type="button" >Submit</button>
+            <button type="button" onClick={handleSubmit} >Submit</button>
         </div>
         }
 
