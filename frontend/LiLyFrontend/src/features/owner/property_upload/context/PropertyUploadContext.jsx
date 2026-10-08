@@ -13,7 +13,7 @@ const PropertyFormProvider = ({children})=>{
     setCurrentStep((prev)=>prev-1);
    }
 
-   const [formData,setFormData] = useState({
+   const initialFormData = {
      title: "",
      propertyType: "Single Room",
      guests: 2,
@@ -35,7 +35,14 @@ const PropertyFormProvider = ({children})=>{
      contactNumber:"",
 
      photos:[]
-   })
+   };
+
+   const handleCancle = ()=>{
+    setFormData(initialFormData);
+    setCurrentStep(1);
+   }
+
+   const [formData,setFormData] = useState(initialFormData);
     return (
         <PropertyFormContext.Provider value={{ 
             currentStep,
@@ -43,7 +50,8 @@ const PropertyFormProvider = ({children})=>{
             handleNext,
             handleBack,
             formData,
-            setFormData
+            setFormData,
+            handleCancle
             }}>
             {children}
         </PropertyFormContext.Provider>
