@@ -2,7 +2,7 @@ import { useState } from 'react';
 import hero from '../../../../../assets/hero.jpg'
 import { House , MapPin , Search,IndianRupee ,  Calendar  } from 'lucide-react';
 
-const Hero = ({ searchData,onSearchChange}) =>{
+const Hero = ({ searchData,onSearchChange,handleSearch}) =>{
    
    return (
       <section  className='relative min-h-[255px]'>
@@ -89,7 +89,8 @@ const Hero = ({ searchData,onSearchChange}) =>{
           {/* Search button */}
           <button
             type="button"
-            className="flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-700"
+            className="flex items-center justify-center gap-2 rounded-lg bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-primary-hover"
+            onClick={handleSearch}
           >
             <Search className="h-5 w-5" />
             Search

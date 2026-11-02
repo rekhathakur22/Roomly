@@ -92,13 +92,13 @@ const PropertyFilters = ({ onFilterChange }) => {
     items.map((item) => (
       <label
         key={item}
-        className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-600 transition hover:text-indigo-600"
+        className="flex cursor-pointer items-center gap-2.5 text-sm text-gray-600 transition hover:text-brand-primary-hover"
       >
         <input
           type="checkbox"
           checked={filters[category].includes(item)}
           onChange={() => handleCheckboxChange(category, item)}
-          className="h-4 w-4 cursor-pointer accent-indigo-600"
+          className="h-4 w-4 cursor-pointer accent-brand-primary"
         />
 
         <span>{item}</span>
@@ -116,7 +116,7 @@ const PropertyFilters = ({ onFilterChange }) => {
         <button
           type="button"
           onClick={handleClearAll}
-          className="text-xs font-medium text-indigo-600 hover:text-indigo-800"
+          className="text-xs font-medium text-brand-primary hover:text-brand-primary-hover"
         >
           Clear All
         </button>
@@ -150,7 +150,7 @@ const PropertyFilters = ({ onFilterChange }) => {
               handleBudgetChange("maxBudget", e.target.value)
             }
             aria-label="Maximum monthly budget"
-            className="h-1.5 w-full cursor-pointer accent-indigo-600"
+            className="h-1.5 w-full cursor-pointer accent-brand-primary"
           />
 
           <div className="grid grid-cols-2 gap-3">
@@ -218,7 +218,7 @@ const PropertyFilters = ({ onFilterChange }) => {
         <button
           type="button"
           onClick={() => setShowMore((prev) => !prev)}
-          className="mt-4 flex items-center gap-1.5 text-sm font-medium text-indigo-600 hover:text-indigo-800"
+          className="mt-4 flex items-center gap-1.5 text-sm font-medium text-brand-primary hover:text-brand-primary-hover"
         >
           {showMore ? "Show Less" : "Show More"}
 
