@@ -43,13 +43,6 @@ const Nav = () => {
 
         {/* Desktop actions */}
         <div className="hidden shrink-0 items-center gap-3 md:flex">
-          <button
-            type="button"
-            aria-label="Search properties"
-            className="rounded-md p-2 hover:bg-gray-100"
-          >
-            <Search className="h-5 w-5" />
-          </button>
 
           <NavLink
             to="/login"

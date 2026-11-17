@@ -52,8 +52,6 @@ const PropertyFilters = ({ onFilterChange }) => {
         ...prev,
         [category]: updated,
       };
-
-      onFilterChange?.(nextFilters);
       return nextFilters;
     });
   };
@@ -67,8 +65,6 @@ const PropertyFilters = ({ onFilterChange }) => {
         ...prev,
         [field]: amount,
       };
-
-      onFilterChange?.(nextFilters);
       return nextFilters;
     });
   };
@@ -116,7 +112,7 @@ const PropertyFilters = ({ onFilterChange }) => {
         <button
           type="button"
           onClick={handleClearAll}
-          className="text-xs font-medium text-brand-primary hover:text-brand-primary-hover"
+          className="text-xs font-medium text-brand-primary cursor-pointer hover:text-brand-primary-hover"
         >
           Clear All
         </button>
@@ -229,6 +225,13 @@ const PropertyFilters = ({ onFilterChange }) => {
           )}
         </button>
       </section>
+
+      <div className="bg-brand-primary bg-brand-primary-hover flex justify-center items-center mt-3 py-1">
+        <button 
+        type="button"
+        onClick={() => onFilterChange?.(filters)}
+        className="cursor-pointer text-white text-sm" >Apply Filters</button>
+      </div>
     </aside>
   );
 };

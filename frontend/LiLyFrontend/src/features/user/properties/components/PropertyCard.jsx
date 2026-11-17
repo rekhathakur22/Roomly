@@ -68,7 +68,7 @@ const PropertyCard = ({response}) =>{
       </div>
       <div className='flex gap-2 mx-1  items-center'><MapPin className='w-3'/> <span className='text-sm'>{response.streetAddress}, {response.city}</span></div>
       <div  className='flex mx-2 gap-2 text-sm text-ui-text-dark mt-2'>
-        {response.amenities?.slice(0,3).map((item)=>(<div className='bg-gray-200/80 text-[13px] px-1.5 py-0.5 rounded-sm'><h1>{item}</h1></div>))}
+        {response.amenities?.slice(0,3).map((item)=>(<div key={item} className='bg-gray-200/80 text-[13px] px-1.5 py-0.5 rounded-sm'><h1>{item}</h1></div>))}
       </div>
       <div className='flex justify-center items-center drop-shadow-md bg-brand-primary/20 rounded-full mx-6 py-1.5 mt-4 mb-4 text-brand-primary hover:text-white hover:bg-brand-primary '>
         <button className='text-sm font-semibold cursor-pointer'>View Details</button>

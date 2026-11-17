@@ -3,6 +3,8 @@ import Nav from "../../components/Nav/Nav";
 import Hero from "../../components/Hero/Hero";
 import PropertyFilters from "../../components/PropertyFilters";
 import PropertyCard from "../../components/PropertyCard";
+import Spinner from "../../components/Spinner";
+import ErrorHome from "../../components/ErrorHome";
 
 const initialSearchData = {
   location:"",
@@ -16,6 +18,10 @@ const Home = () =>{
   const [properties, setProperties] = useState([]);
   const [loading,setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [filteredProperties,setFilteredProp] = useState([]);
+  const [error,setError] = useState("");
+  
+
 
   // fetch random properties
   useEffect(()=>{
@@ -26,11 +32,17 @@ const Home = () =>{
     try{
        setLoading(true);
        const response = await fetch('http://localhost:4000/user/properties/');
+       if (!response.ok) {
+  throw new Error(`Server Error: ${response.status}`);
+}
+
        const result = await response.json();
        setProperties(result);
+       setFilteredProp(result);
     }
     catch(e){
-        console.log(e);
+        console.log(e.message);
+        setError(e.message);
     }
     finally{
       setLoading(false);
@@ -62,7 +74,7 @@ const Home = () =>{
         const result = await fetch(`http://localhost:4000/user/properties/search?${params.toString()}`);
         const data = await result.json();
         console.log('handleSearch',data);
-        setProperties(data);
+        setFilteredProp(data);
     }
     catch(e){
       console.log('error at handleSearch',e.message);
@@ -74,6 +86,41 @@ const Home = () =>{
 
   }
   
+  // filter handling
+  const handleFilters = (data) =>{
+    console.log(data);
+    const filters =  properties.filter((property)=>{
+     // property ka type match karna he 
+     const typeMatch = data.propertyTypes.length === 0 || 
+                      data.propertyTypes.includes(property.propertyType);
+
+     // budget match 
+     const budgetMatch =  Number(property.monthlyRent) >= data.minBudget &&
+                         Number(property.monthlyRent) <= data.maxBudget 
+
+    // room type
+    const room = {
+       "Single Occupancy":1,
+       "Double Occupancy":2,
+       "Triple Occupancy":3
+    } 
+    const roomTypeMatch = data.roomTypes.length === 0 || 
+              data.roomTypes.some((type)=>
+                room[type]=== property.guests
+                );
+    
+      const amenitiesMatch = data.amenities.length === 0 || 
+              data.amenities.some((amenity)=>
+                property.amenities.includes(amenity)
+                );
+      
+      
+      return (typeMatch && budgetMatch && roomTypeMatch && amenitiesMatch);
+
+    }) 
+     
+    setFilteredProp(filters);
+  }
 
  return (
     <>
@@ -90,26 +137,27 @@ const Home = () =>{
           {/* Left sidebar */}
           {/* Left sidebar */}
 <           aside className="hidden lg:block">
-            <PropertyFilters />
+            <PropertyFilters onFilterChange={handleFilters}/>
             </aside>
         
 
           {/* Right side: property cards will go here */}
           <section className="min-w-0">
+          
             {!hasSearched && <h2 className="text-xl font-bold text-gray-900">
                Explore Properties
             </h2>}
-            {hasSearched && properties.length > 0 && <h2 className="text-xl font-bold text-gray-900">
-               {properties.length} Properties found
+            {hasSearched && filteredProperties.length > 0 && <h2 className="text-xl font-bold text-gray-900">
+               {filteredProperties.length} Properties found
             </h2>}
-            {hasSearched && properties.length === 0 && <h2 className="text-xl font-bold text-gray-900">
+            {hasSearched && filteredProperties.length === 0 && <h2 className="text-xl font-bold text-gray-900">
                No Matching records found
             </h2>}
 
 
 
             {/* We will add property cards here next */}
-            {loading ? <h1>loading</h1> : properties.length > 0 ?
+            {loading ? <Spinner/> : properties.length > 0 ?
              (<div 
              className="
              mt-10
@@ -121,10 +169,10 @@ const Home = () =>{
              gap-6
              ">
               {
-                properties.map((item)=><PropertyCard key={item._id} response={item}></PropertyCard>) 
+                filteredProperties.map((item)=><PropertyCard key={item._id} response={item}></PropertyCard>) 
               }
             </div>):
-             <h1>no matching data found</h1>
+             error.trim().length === 0 ? <h1>no matching data found</h1> : <ErrorHome fetchDefaultProperties={fetchDefaultProperties}/>
             }
             
           </section>

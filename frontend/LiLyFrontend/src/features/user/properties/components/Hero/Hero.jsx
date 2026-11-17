@@ -47,7 +47,7 @@ const Hero = ({ searchData,onSearchChange,handleSearch}) =>{
              name="propertyType"
              value={searchData.propertyType}
              onChange={onSearchChange}
-             className="w-full bg-transparent text-sm outline-none"
+             className="w-full bg-transparent text-sm outline-none cursor-pointer"
            >
              <option value="">Property Type</option>
              <option value="PG">PG</option>
@@ -65,7 +65,7 @@ const Hero = ({ searchData,onSearchChange,handleSearch}) =>{
               name="budget"
               value={searchData.budget}
               onChange={onSearchChange}
-              className="w-full bg-transparent text-sm outline-none"
+              className="w-full bg-transparent text-sm outline-none cursor-pointer"
             >
               <option value="">Select Budget</option>
               <option value="5000">Up to ₹5,000</option>
@@ -83,13 +83,13 @@ const Hero = ({ searchData,onSearchChange,handleSearch}) =>{
                name="moveInDate"
                value={searchData.moveInDate}
                onChange={onSearchChange}
-               className="w-full bg-transparent text-sm outline-none"
+               className="w-full bg-transparent text-sm outline-none cursor-pointer"
               />
              </div>
           {/* Search button */}
           <button
             type="button"
-            className="flex items-center justify-center gap-2 rounded-lg bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-primary-hover"
+            className="flex items-center justify-center gap-2 cursor-pointer rounded-lg bg-brand-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-brand-primary-hover"
             onClick={handleSearch}
           >
             <Search className="h-5 w-5" />
