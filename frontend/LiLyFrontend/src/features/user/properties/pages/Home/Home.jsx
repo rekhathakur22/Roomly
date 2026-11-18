@@ -31,7 +31,7 @@ const Home = () =>{
   const fetchDefaultProperties = async ()=>{
     try{
        setLoading(true);
-       const response = await fetch('http://localhost:4000/user/properties/');
+       const response = await fetch('https://roomly-hew8.onrender.com/user/properties/');
        if (!response.ok) {
   throw new Error(`Server Error: ${response.status}`);
 }
@@ -71,7 +71,7 @@ const Home = () =>{
             params.append(key,value);
            }
          })
-        const result = await fetch(`http://localhost:4000/user/properties/search?${params.toString()}`);
+        const result = await fetch(`https://roomly-hew8.onrender.com/user/properties/search?${params.toString()}`);
         const data = await result.json();
         console.log('handleSearch',data);
         setFilteredProp(data);
