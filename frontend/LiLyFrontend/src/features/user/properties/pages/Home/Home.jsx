@@ -37,6 +37,8 @@ const Home = () =>{
 }
 
        const result = await response.json();
+
+console.log("API Response:", result);
        setProperties(result);
        setFilteredProp(result);
     }
