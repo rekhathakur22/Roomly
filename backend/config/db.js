@@ -1,35 +1,42 @@
-const {MongoClient} = require('mongodb')
+const { MongoClient } = require('mongodb');
 
 const client = new MongoClient(process.env.MONGO_URI);
 
 let db;
-const connectDb = async () =>{
-     try{
-       await client.connect();
-       console.log("database connection successfull");
 
-        db = client.db(process.env.DB_NAME);
+const connectDb = async () => {
+  try {
+    await client.connect();
 
-        return db;
+    console.log("Database connection successful");
 
-     }
-    catch(e) {
-      console.error("MongoDB connection failed:", e.message);
-      throw e;
-    }
+    db = client.db(process.env.DB_NAME);
 
+    console.log("Connected Database:", db.databaseName);
+
+    const collection = db.collection("properties");
+
+    const total = await collection.countDocuments();
+
+    console.log("Properties Collection Count:", total);
+
+    return db;
+
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+    throw error;
   }
-const getDb = ()=>{
-    
-       if (!db) {
-     throw new Error("Database is not connected");
-     }
+};
 
-      return db;
-    
-}
+const getDb = () => {
+  if (!db) {
+    throw new Error("Database is not connected");
+  }
+
+  return db;
+};
 
 module.exports = {
-    connectDb,
-    getDb
-}
+  connectDb,
+  getDb
+};
