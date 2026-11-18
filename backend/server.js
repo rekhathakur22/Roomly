@@ -11,6 +11,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.status(200).send("Roomly Backend is running successfully!");
+});
 app.use("/owner/properties",PropertyRouter);
 app.use('/user/properties',UserRouter);
 
